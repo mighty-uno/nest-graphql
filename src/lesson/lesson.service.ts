@@ -39,6 +39,6 @@ export class LessonService {
     const lesson = await this.getLesson(lessonId);
     console.log(lesson);
     lesson.students = [...(lesson.students || []), ...studentId];
-    return this.lessonRepository.save(lesson);
+    return await this.lessonRepository.save(lesson);
   }
 }
