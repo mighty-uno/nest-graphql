@@ -2,10 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { LessonEntity } from './lesson.entity';
 import { Repository } from 'typeorm';
-import { LessonDTO } from './dto/lesson.dto';
 import { ObjectID } from 'mongodb';
 import { LessonInput } from './lesson.input';
-import { constants } from 'buffer';
 import { LessonAssignedToStudent } from './lessonAssignedToStudent.input';
 
 @Injectable()
