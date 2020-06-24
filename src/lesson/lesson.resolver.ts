@@ -3,6 +3,7 @@ import { LessonType } from './lesson.type';
 import { LessonService } from './lesson.service';
 import { LessonDTO } from './dto/lesson.dto';
 import { LessonEntity } from './lesson.entity';
+import { LessonInput } from './lesson.input';
 
 @Resolver(of => LessonType)
 export class LessonResolver {
@@ -13,12 +14,15 @@ export class LessonResolver {
     return this.lessonService.getLesson(_id);
   }
 
+  @Query(() => [LessonType])
+  lessons(): Promise<LessonEntity[]> {
+    return this.lessonService.allLesson();
+  }
+
   @Mutation(() => LessonType)
   async createLesson(
-    @Args('name') name: string,
-    @Args('startDate') startDate: string,
-    @Args('endDate') endDate: string,
+    @Args('lessonInput') lessonInput: LessonInput,
   ): Promise<LessonEntity> {
-    return this.lessonService.createLesson({ name, startDate, endDate });
+    return this.lessonService.createLesson(lessonInput);
   }
 }

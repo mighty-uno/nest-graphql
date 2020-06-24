@@ -4,6 +4,7 @@ import { LessonEntity } from './lesson.entity';
 import { Repository } from 'typeorm';
 import { LessonDTO } from './dto/lesson.dto';
 import { ObjectID } from 'mongodb';
+import { LessonInput } from './lesson.input';
 
 @Injectable()
 export class LessonService {
@@ -19,8 +20,12 @@ export class LessonService {
     return result;
   }
 
-  async createLesson(lesson: LessonDTO): Promise<LessonEntity> {
-    const result = this.lessonRepository.create(lesson);
+  async allLesson(): Promise<LessonEntity[]> {
+    return await this.lessonRepository.find();
+  }
+
+  async createLesson(lessonInput: LessonInput): Promise<LessonEntity> {
+    const result = this.lessonRepository.create(lessonInput);
     const savedLesson = await this.lessonRepository.save(result);
     console.log(savedLesson);
     return savedLesson;

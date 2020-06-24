@@ -3,6 +3,7 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { LessonModule } from './lesson/lesson.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { typeOrmConfig } from './config/typeorm.config';
+import { StudentModule } from './student/student.module';
 
 @Module({
   imports: [
@@ -11,6 +12,7 @@ import { typeOrmConfig } from './config/typeorm.config';
       autoSchemaFile: true,
     }),
     LessonModule,
+    StudentModule,
   ],
 })
 export class AppModule {}
