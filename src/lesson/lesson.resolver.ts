@@ -8,22 +8,17 @@ import { LessonEntity } from './lesson.entity';
 export class LessonResolver {
   constructor(private lessonService: LessonService) {}
 
-  @Query(returns => LessonType)
-  lesson(): LessonType {
-    return {
-      id: 'as',
-      name: 'Math',
-      startDate: new Date().toISOString(),
-      endDate: new Date().toISOString(),
-    };
+  @Query(() => LessonType)
+  lesson(@Args('_id') _id: string): Promise<LessonEntity> {
+    return this.lessonService.getLesson(_id);
   }
 
-  @Mutation(returns => LessonType)
-  createLesson(
+  @Mutation(() => LessonType)
+  async createLesson(
     @Args('name') name: string,
     @Args('startDate') startDate: string,
     @Args('endDate') endDate: string,
-  ) {
+  ): Promise<LessonEntity> {
     return this.lessonService.createLesson({ name, startDate, endDate });
   }
 }
