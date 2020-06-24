@@ -5,6 +5,8 @@ import { Repository } from 'typeorm';
 import { LessonDTO } from './dto/lesson.dto';
 import { ObjectID } from 'mongodb';
 import { LessonInput } from './lesson.input';
+import { constants } from 'buffer';
+import { LessonAssignedToStudent } from './lessonAssignedToStudent.input';
 
 @Injectable()
 export class LessonService {
@@ -29,5 +31,16 @@ export class LessonService {
     const savedLesson = await this.lessonRepository.save(result);
     console.log(savedLesson);
     return savedLesson;
+  }
+
+  async assignStudentToLesson(
+    lessonAssignedStudent: LessonAssignedToStudent,
+  ): Promise<LessonEntity> {
+    const { lessonId, studentId } = lessonAssignedStudent;
+    debugger;
+    const lesson = await this.getLesson(lessonId);
+    console.log(lesson);
+    lesson.students = [...(lesson.students || []), ...studentId];
+    return this.lessonRepository.save(lesson);
   }
 }
