@@ -35,7 +35,7 @@ export class LessonService {
     lessonAssignedStudent: LessonAssignedToStudent,
   ): Promise<LessonEntity> {
     const { lessonId, studentId } = lessonAssignedStudent;
-    debugger;
+
     const lesson = await this.getLesson(lessonId);
     console.log(lesson);
     lesson.students = [...(lesson.students || []), ...studentId];
